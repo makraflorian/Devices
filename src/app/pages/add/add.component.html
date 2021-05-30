@@ -1,0 +1,229 @@
+
+<div style="display: flex; justify-content: center;">
+<h1>Add Device FHIR</h1></div>
+<div style="display: flex; justify-content: center;">
+
+<form [formGroup]="addDevice" (ngSubmit)="onSubmit()" style="display: block; justify-content: center; width: 90%;">
+    <div class="max-width">
+      <mat-card>
+    <mat-form-field class="max-width">
+      <mat-label>resourceType</mat-label>
+      <input matInput placeholder="Pl: Device" focus formControlName="resourceType" >
+    </mat-form-field>
+
+    <mat-form-field formGroupName="text">
+
+			<mat-label>status</mat-label>
+			<input matInput  focus formControlName="status" >
+
+    </mat-form-field>
+        <mat-form-field formGroupName="text">
+
+			<mat-label>div</mat-label>
+			<input matInput focus formControlName="div" >
+
+	</mat-form-field></mat-card>
+</div>
+<div class="max-width">
+  <mat-card class="margin-bottom" formArrayName="identifier"  *ngFor="let line of getIdentifier.controls; let i=index">
+    <mat-label>Identifier</mat-label><br>
+  <mat-form-field [formGroupName]="i">
+    <mat-label>use</mat-label>
+    <mat-select matNativeControl formControlName="use">
+      <mat-option value="usual">usual</mat-option>
+      <mat-option value="official">official</mat-option>
+      <mat-option value="temp">temp</mat-option>
+      <mat-option value="secondary">secondary</mat-option>
+      <mat-option value="old">old</mat-option>
+    </mat-select>
+    </mat-form-field>
+    <mat-form-field [formGroupName]="i">
+    <mat-label>system</mat-label>
+    <input matInput focus formControlName="system" >
+    </mat-form-field>
+    <mat-form-field [formGroupName]="i">
+      <mat-label>value</mat-label>
+      <input matInput focus formControlName="value" >
+      </mat-form-field>
+</mat-card>
+<div style="display: flex; justify-content: center;">
+<button type="button" mat-button (click)="addIdentifier()">Add Identifier</button></div>
+</div>
+<div class="max-width">
+<mat-card class="margin-bottom" formArrayName="udiCarrier"  *ngFor="let line of getUDICarrier.controls; let i=index">
+  <mat-label>UDI Carrier</mat-label><br>
+  <mat-form-field [formGroupName]="i">
+    <mat-label>deviceIdentifier</mat-label>
+    <input matInput focus formControlName="deviceIdentifier" >
+    </mat-form-field>
+    <mat-form-field [formGroupName]="i">
+    <mat-label>issuer</mat-label>
+    <input matInput focus pattern="\S*" formControlName="issuer" >
+    </mat-form-field>
+    <mat-form-field [formGroupName]="i">
+      <mat-label>jurisdiction</mat-label>
+      <input matInput focus pattern="\S*" formControlName="jurisdiction" >
+      </mat-form-field>
+</mat-card>
+<div style="display: flex; justify-content: center;">
+<button type="button" mat-button (click)="addUDICarrier()">Add UDI Carrier</button></div>
+</div>
+<div class="max-width">
+  <mat-card>
+<mat-form-field class="max-width">
+  <mat-label>status</mat-label>
+  <mat-select matNativeControl formControlName="status">
+    <mat-option value="active">active</mat-option>
+    <mat-option value="inactive">inactive</mat-option>
+    <mat-option value="entered-in-error">entered-in-error</mat-option>
+    <mat-option value="unknown">unknown</mat-option>
+  </mat-select>
+</mat-form-field>
+</mat-card>
+</div>
+<div class="max-width">
+<mat-card class="margin-bottom" formArrayName="statusReason"  *ngFor="let line of getStatusReason.controls; let i=index">
+  <mat-label>Status Reason</mat-label><br>
+  <mat-form-field [formGroupName]="i">
+    <mat-label>text</mat-label>
+    <mat-select matNativeControl formControlName="text">
+      <mat-option value="online">online</mat-option>
+      <mat-option value="paused">paused</mat-option>
+      <mat-option value="standby">standby</mat-option>
+      <mat-option value="offline">offline</mat-option>
+      <mat-option value="not-ready">not-ready</mat-option>
+      <mat-option value="transduc-discon">transduc-discon</mat-option>
+      <mat-option value="hw-discon">hw-discon</mat-option>
+      <mat-option value="off">off</mat-option>
+    </mat-select>
+    </mat-form-field>
+</mat-card>
+<div style="display: flex; justify-content: center;">
+<button type="button" mat-button (click)="addStatusReason()">Add Status Reason</button></div>
+</div>
+<div class="max-width">
+  <mat-card>
+<mat-form-field class="max-width">
+  <mat-label>distinctIdentifier</mat-label>
+  <input matInput focus formControlName="distinctIdentifier" >
+</mat-form-field>
+
+<mat-form-field class="max-width">
+  <mat-label>manufacturer</mat-label>
+  <input matInput focus formControlName="manufacturer" placeholder="Pl: Something.corp">
+</mat-form-field>
+
+<mat-form-field class="max-width">
+  <mat-label>manufactureDate</mat-label>
+  <input matInput focus placeholder="Pl: 2015-11-18" pattern="([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?" formControlName="manufactureDate" >
+</mat-form-field>
+</mat-card>
+</div>
+<div class="max-width">
+  <mat-card>
+<mat-form-field class="max-width">
+  <mat-label>expirationDate</mat-label>
+  <input matInput focus placeholder="Pl: 2015-11-18" pattern="([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?" formControlName="expirationDate" >
+</mat-form-field>
+
+<mat-form-field class="max-width">
+  <mat-label>serialNumber</mat-label>
+  <input matInput focus placeholder="Pl: 00154" formControlName="serialNumber" >
+</mat-form-field>
+
+<mat-form-field class="max-width">
+  <mat-label>lotNumber</mat-label>
+  <input matInput placeholder="Pl: 1545" focus formControlName="lotNumber" >
+</mat-form-field>
+</mat-card>
+</div>
+<div class="max-width">
+<mat-card class="margin-bottom" formArrayName="deviceName"  *ngFor="let line of getDeviceName.controls; let i=index">
+  <mat-label>Device name</mat-label><br>
+  <mat-form-field [formGroupName]="i">
+  <mat-label>name</mat-label>
+    <input matInput focus formControlName="name" placeholder="Pl: Laptop">
+    </mat-form-field>
+  <mat-form-field [formGroupName]="i">
+    <mat-label>type</mat-label>
+    <mat-select matNativeControl formControlName="type" >
+      <mat-option value="udi-label-name">udi-label-name</mat-option>
+      <mat-option value="user-friendly-name">user-friendly-name</mat-option>
+      <mat-option value="patient-reported-name">patient-reported-name</mat-option>
+      <mat-option value="manufacturer-name">manufacturer-name</mat-option>
+      <mat-option value="model-name">model-name</mat-option>
+      <mat-option value="other">other</mat-option>
+    </mat-select>
+    </mat-form-field>
+</mat-card>
+<div style="display: flex; justify-content: center;">
+<button type="button" mat-button (click)="addDeviceName()">Add Device Name</button></div>
+</div>
+<div class="max-width">
+  <mat-card>
+<mat-form-field class="max-width">
+  <mat-label>modelNumber</mat-label>
+  <input matInput focus formControlName="modelNumber" placeholder="Pl: IB-4558-11">
+</mat-form-field>
+
+<mat-form-field class="max-width">
+  <mat-label>partNumber</mat-label>
+  <input matInput focus formControlName="partNumber" placeholder="Pl: IB-4558.15">
+</mat-form-field>
+
+<mat-form-field formGroupName="type">
+  <mat-label>text</mat-label>
+  <input matInput focus formControlName="text" >
+</mat-form-field>
+</mat-card>
+</div>
+<div class="max-width">
+<mat-card class="margin-bottom" formArrayName="version"  *ngFor="let line of getVersion.controls; let i=index">
+  <mat-label>Version</mat-label><br>
+  <mat-form-field [formGroupName]="i">
+    <mat-label>value</mat-label>
+    <input matInput focus formControlName="value" placeholder="Pl: 11.5">
+    </mat-form-field>
+</mat-card>
+<div style="display: flex; justify-content: center;">
+<button type="button" mat-button (click)="addVersion()">Add Version</button>
+</div>
+</div>
+<div class="max-width">
+<mat-card class="margin-bottom" formArrayName="property"  *ngFor="let line of getProperty.controls; let i=index">
+  <mat-label>Property</mat-label><br>
+  <mat-form-field [formGroupName]="i">
+    <mat-label>type</mat-label>
+    <input matInput focus formControlName="type" >
+    </mat-form-field>
+    <mat-form-field [formGroupName]="i">
+      <mat-label>valueQuantity</mat-label>
+      <input matInput focus formControlName="valueQuantity" >
+      </mat-form-field>
+</mat-card>
+<div style="display: flex; justify-content: center;">
+<button type="button" mat-button (click)="addProperty()">Add Property</button>
+</div>
+</div>
+
+<div class="max-width">
+  <mat-card>
+<mat-form-field class="max-width">
+  <mat-label>patient</mat-label>
+  <input matInput focus formControlName="patient" placeholder="Pl: John Doe">
+</mat-form-field>
+
+<mat-form-field class="max-width">
+  <mat-label>owner</mat-label>
+  <input matInput focus formControlName="owner" placeholder="Pl: John Doe">
+</mat-form-field>
+
+</mat-card>
+</div>
+
+    <div style="display: flex; justify-content: center;">
+    <button mat-button mat-raided-button type="submit" class="btn btn-primary" [disabled]="addDevice.invalid" (click)="addDevicejson(addDevice.value)" style="background-color: blueviolet; margin-bottom: 10px;">Submit</button>
+    </div>
+  </form>
+
+</div>

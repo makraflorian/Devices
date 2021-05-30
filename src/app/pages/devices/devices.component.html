@@ -1,0 +1,38 @@
+<button type="button" mat-raised-button color='primary' (click)="getActive()" style="margin-right: 5px;">Active devices</button>
+<button type="button" mat-raised-button color='primary' (click)="getInactive()" style="margin-right: 5px;">Inactive devices</button>
+<button type="button" mat-raised-button color='primary' (click)="ngAfterViewInit()">All</button>
+
+<mat-table [dataSource]='dataSource' [trackBy]="trackByUid">
+
+    <ng-container matColumnDef='resourceType'>
+        <mat-header-cell *matHeaderCellDef>resourceType</mat-header-cell>
+        <mat-cell *matCellDef='let device'><span class="mobile-label">resourceType:</span>{{device.resourceType}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='status'>
+        <mat-header-cell *matHeaderCellDef>status</mat-header-cell>
+        <mat-cell *matCellDef='let device'><span class="mobile-label">status:</span>{{device.status}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='Device name'>
+        <mat-header-cell *matHeaderCellDef>Device name</mat-header-cell>
+        <mat-cell *matCellDef='let device'><span class="mobile-label">Device name:</span><span *ngIf="device.deviceName[0]">{{device.deviceName[0].name}}</span></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='owner'>
+        <mat-header-cell *matHeaderCellDef>Owner</mat-header-cell>
+        <mat-cell *matCellDef='let device'><span class="mobile-label">Owner</span>{{device.owner}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='actions'>
+        <mat-header-cell *matHeaderCellDef>actions</mat-header-cell>
+        <mat-cell *matCellDef='let device'>
+            <button mat-raised-button color='primary' (click)="openDialog(device)" style="margin-right: 5px;">Delete</button>
+            <button mat-raised-button color='primary' (click)="openUpdateDialog(device)">Update</button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="cols"></mat-header-row>
+     <mat-row *matRowDef="let row; columns: cols;"></mat-row>
+
+</mat-table>

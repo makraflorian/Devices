@@ -1,0 +1,30 @@
+<h3>Updating device</h3>
+<form>
+    <label>resourceType</label><br>
+    <input  [(ngModel)]="newResourceType" placeholder="new resourceType" name="resourceType"><br>
+
+<label>status</label><br>
+  <select [(ngModel)]="newStatus" name="active">
+    <option value="active">active</option>
+    <option value="inactive" >inactive</option>
+    <option value="entered-in-error" >entered-in-error</option>
+    <option value="unknown" >unknown</option>
+  </select><br>
+  <label>Manufacturer</label><br>
+    <input  [(ngModel)]="newManufacturer" placeholder="new Manufacturer" name="Manufacturer">
+    <label>ManufactureDate</label><br>
+    <input  [(ngModel)]="newManufactureDate" placeholder="new ManufactureDate" name="ManufactureDate" pattern="([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?">
+    <label>ExpirationDate</label><br>
+    <input  [(ngModel)]="newExpirationDate" placeholder="new ExpirationDate" name="ExpirationDate" pattern="([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?">
+    <label>SerialNumber</label><br>
+    <input  [(ngModel)]="newSerialNumber" placeholder="new SerialNumber" name="SerialNumber">
+    <label>ModelNumber</label><br>
+    <input  [(ngModel)]="newModelNumber" placeholder="new ModelNumber" name="ModelNumber"><br>
+    <label>Owner</label><br>
+    <input  [(ngModel)]="newOwner" placeholder="new Owner" name="Owner"><br>
+    <label>Patient</label><br>
+    <input  [(ngModel)]="newPatient" placeholder="new Patient" name="Patient"><br>
+</form>
+
+  <button mat-raised-button color='primary' (click)="updateDevice()" style="margin-right: 5px;">Save</button>
+  <button mat-raised-button color='primary' (click)="onNoClick()">Cancel</button>
